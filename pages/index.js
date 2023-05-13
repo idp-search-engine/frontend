@@ -1,8 +1,20 @@
 import Link from "next/link"
 import { getCookies, getCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
+import NewSearch from "../components/NewSearch";
 
 export default function Home(props) {
     const authURL = "http://" + (process.env.PROXY_IP || "localhost") + "/auth"
+    const router = useRouter();
+
+    function searchHandler(searchData) {
+      router.push({
+        pathname: "/search",
+        query: {
+          "q": searchData.search
+        }
+      })
+    }
 
     return (
         <>
@@ -19,6 +31,7 @@ export default function Home(props) {
         <Link href={authURL + "/login"}>Login mofo</Link>
         </>
       )}
+        <NewSearch onSearch={searchHandler} title="Search Something man"></NewSearch>
         </>
     )
 }
