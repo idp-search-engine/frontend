@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import NewPage from "../../components/NewPage";
+import { getUserProps } from '../../utils/auth';
 
 export default function Home() {
     const [taskId, setTaskId] = useState(null);
@@ -27,3 +28,15 @@ export default function Home() {
         </>
       )
 }
+
+export async function getServerSideProps(context) {
+    const { req, res } = context;
+    const { user, authURL } = getUserProps({ req, res });
+  
+    return {
+      props: {
+        user,
+        authURL
+      }
+    };
+  }

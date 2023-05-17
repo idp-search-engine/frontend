@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import NewSearch from "../../components/NewSearch";
+import { getUserProps } from '../../utils/auth';
 
 export default function Home(props) {
   const router = useRouter();
@@ -62,6 +63,8 @@ export default function Home(props) {
 
 export async function getServerSideProps(context) {
   const searchParam = context.query.q
+  const { req, res } = context;
+  const { user, authURL } = getUserProps({ req, res });
 
   const response = await fetch("http://" + (process.env.ESINTERACTOR_HOST || "localhost") + "/query?" + new URLSearchParams(
     {
@@ -73,6 +76,8 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
+      user,
+      authURL,
       searchResults: data.hits.hits
     }
   }

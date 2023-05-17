@@ -9,6 +9,7 @@ WORKDIR /app
 COPY pages pages
 COPY styles styles
 COPY components components
+COPY utils utils
 COPY package.json .
 
 RUN npm install
