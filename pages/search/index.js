@@ -64,9 +64,9 @@ export default function Home(props) {
 export async function getServerSideProps(context) {
   const searchParam = context.query.q
   const { req, res } = context;
-  const { user, authURL } = getUserProps({ req, res });
+  const { user, authURL } = await getUserProps({ req, res });
 
-  const response = await fetch("http://" + (process.env.ESINTERACTOR_HOST || "localhost") + "/query?" + new URLSearchParams(
+  const response = await fetch("http://" + (process.env.ESINTERACTOR_HOST || "es-interactor-service:8000") + "/query?" + new URLSearchParams(
     {
       q: searchParam,
     }

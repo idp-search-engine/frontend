@@ -2,7 +2,7 @@
 
 async function handler(req, res) {
     if (req.method == "POST") {
-        const url = new URL("http://" + (process.env.WEBCRAWLER_HOST || "localhost") + "/tasks/scrape");
+        const url = new URL("http://" + (process.env.WEBCRAWLER_HOST || "web-crawler-service:8000") + "/tasks/scrape");
         const newReq = new Request(url, {
           method: 'POST',
           headers: {

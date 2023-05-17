@@ -19,7 +19,7 @@ MyApp.getInitialProps = async ({ Component, ctx }) => {
   }
 
   // Retrieve user authentication details and other data
-  const { user, authURL } = getUserProps(ctx);
+  const { user, authURL } = await getUserProps(ctx);
 
   return { pageProps, user, authURL };
 };
