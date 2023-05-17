@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import classes from './NewPage.module.css';
 
-function NewSearch(props) {
+function NewPage(props) {
     const addPageInputRef = useRef();
   
     function submitHandler(event) {
@@ -31,4 +31,4 @@ function NewSearch(props) {
     )
 }
 
-export default NewSearch;
+export default NewPage;

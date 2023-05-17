@@ -7,6 +7,8 @@ RUN mkdir /app
 WORKDIR /app
 
 COPY pages pages
+COPY styles styles
+COPY components components
 COPY package.json .
 
 RUN npm install
