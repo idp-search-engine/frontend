@@ -1,11 +1,11 @@
 import MainNavigation from './MainNavigation';
 import classes from './Layout.module.css';
 
-function Layout(props) {
+function Layout({ user, authURL, children }) {
   return (
     <div>
-      <MainNavigation />
-      <main className={classes.main}>{props.children}</main>
+      <MainNavigation user={user} authURL={authURL} />
+      <main className={classes.main}>{children}</main>
     </div>
   );
 }

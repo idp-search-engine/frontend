@@ -1,8 +1,27 @@
-import '../styles/globals.css'
-import Layout from '../components/Layout'
+import '../styles/globals.css';
+import Layout from '../components/Layout';
+import { getUserProps } from '../utils/auth';
 
-function MyApp({ Component, pageProps }) {
-  return <Layout><Component {...pageProps} /></Layout>
+function MyApp({ Component, pageProps, user, authURL }) {
+  return (
+    <Layout user={user} authURL={authURL}>
+      <Component {...pageProps} />
+    </Layout>
+  );
 }
 
-export default MyApp
+MyApp.getInitialProps = async ({ Component, ctx }) => {
+  let pageProps = {};
+
+  // Fetch additional data on the server side
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+
+  // Retrieve user authentication details and other data
+  const { user, authURL } = getUserProps(ctx);
+
+  return { pageProps, user, authURL };
+};
+
+export default MyApp;
