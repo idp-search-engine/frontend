@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import NewPage from "../../components/NewPage";
+import ScrapeStatus from "../../components/ScrapeStatus";
 import { getUserProps } from '../../utils/auth';
 import Link from "next/link";
 
 export default function Home({ user, authURL }) {
     const [taskId, setTaskId] = useState(null);
+    const [scrapeStatus, setScrapeStatus] = useState(null);
     
     async function addPageHandler(pageData) {
         const response = await fetch("/api/new-page",
@@ -20,6 +22,12 @@ export default function Home({ user, authURL }) {
         setTaskId(data.task_id);
     }
 
+    async function getScrapeStatusHandler(scrapeData) {
+        const response = await fetch("/api/scrape-status?q=" + scrapeData.task, {method: 'GET'})
+        const data = await response.json()
+        setScrapeStatus(data.status)
+    }
+
     return (
         <>
               {user ? (
@@ -28,6 +36,10 @@ export default function Home({ user, authURL }) {
                 <NewPage onAddPage={addPageHandler}></NewPage>
                 {taskId &&
                 <h3>Page being added, task id: {taskId}</h3>}
+                <h2>Get scrape status</h2>
+                <ScrapeStatus onGetScrapeStatus={getScrapeStatusHandler}></ScrapeStatus>
+                {scrapeStatus &&
+                  <h3>Scrape status: {scrapeStatus}</h3>}
             </>
             ) : (
             <>
