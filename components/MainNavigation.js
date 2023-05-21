@@ -1,4 +1,5 @@
 import classes from './MainNavigation.module.css';
+import Dropdown from './Dropdown.js'
 import Link from 'next/link';
 
 function MainNavigation({ user, authURL }) {
@@ -14,11 +15,10 @@ function MainNavigation({ user, authURL }) {
             <Link href='/new-page'>Add New Page</Link>
           </li>
           <li>
-            {user ? (
-              <Link href={authURL + "/logout"}>Logout</Link>
-            ) : (
-              <Link href={authURL + "/login"}>Login</Link>
-            )}
+          {user ? (
+          <Dropdown user={user} authURL={authURL}></Dropdown>) : (
+            <Link href={authURL + "/login"}>Login</Link>
+          )}
           </li>
         </ul>
       </nav>
