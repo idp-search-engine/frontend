@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import NewSearch from "../components/NewSearch";
 import { getUserProps } from '../utils/auth';
 
-export default function Home() {
+export default function Home({ user, authURL}) {
   const router = useRouter();
 
   function searchHandler(searchData) {

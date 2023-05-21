@@ -11,6 +11,8 @@ COPY styles styles
 COPY components components
 COPY utils utils
 COPY package.json .
+COPY postcss.config.js .
+COPY tailwind.config.js .
 
 RUN npm install
 RUN npm run build

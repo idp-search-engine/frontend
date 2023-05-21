@@ -1,0 +1,25 @@
+.header ul {
+list-style: none;
+margin: 0;
+padding: 0;
+align-items: center;
+display: flex;
+}
+
+.header li {
+margin-left: 3rem;
+align-items: center;
+display: flex;
+}
+
+.header a {
+text-decoration: none;
+font-size: 1rem !important;
+color: #5e0603 !important;
+}
+
+.header a:hover,
+.header a:active,
+.header a.active {
+color: rgb(255, 23, 23) !important;
+}
